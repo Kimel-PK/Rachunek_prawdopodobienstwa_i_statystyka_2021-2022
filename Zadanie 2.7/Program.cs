@@ -1,10 +1,30 @@
-﻿using System;
+﻿/*
+
+	Program napisany w języku C#
+	Aby uruchomić program należy:
+	posiadać zainstalowane środowisko .NET
+	otworzyć cmd lub powershell i w folderze projektu wpisać polecenie "dotnet run"
+
+	Odpowiedź do podpunktu 3)
+	
+	uruchomiłem program 20 razy i zapisałem wyniki
+	istnieje strasznie duża rozbieżność pomiedzy liczbą losowań aby uzyskać przybliżenie
+	dużo razy zdarza się także że liczba losowań jest tak duża że program wydaje się nie odpowiadać
+	po 20 uruchomieniach taka sytuacja zdarzyła się 1 raz
+	średnia ilość losowań w 20 próbach potrzebnych do uzyskania wyniku 41,35% z dokładnością 0,1% to 448 losowań
+
+*/
+
+using System;
 using System.Collections.Generic;
-using AwokeKnowing.GnuplotCSharp;
 
 namespace Zadanie_2_7 {
 	class Program {
 		static void Main(string[] args) {
+			
+			double zdarzeniaSprzyjające = 0;
+			double oczekiwanyWynik = 0.4135;
+			int ileLosowań = 0;
 			
 			// 1)
 			// ziarno generatora jest określane na podstawie zegaru systemowego w momencie utworzenia obiektu klasy
@@ -15,16 +35,17 @@ namespace Zadanie_2_7 {
 			// 2)
 			// symulujemy pojedyncze losowanie
 			zestawKart.Losuj();
-			if (zestawKart.CzyZawieraTrefl())
+			ileLosowań++;
+			if (zestawKart.CzyZawieraTrefl()) {
 				Console.WriteLine("W pojedynczym losowaniu zestaw zawierał Trefla");
-			else
+			} else {
 				Console.WriteLine("W pojedynczym losowaniu zestaw nie zawierał Trefla");
+				zdarzeniaSprzyjające++;
+			}
 			
-			double zdarzeniaSprzyjające = 0;
-			double oczekiwanyWynik = 0.4135;
-			int ileLosowań = 0;
-			
-			for (; Math.Abs (oczekiwanyWynik - (zdarzeniaSprzyjające / ileLosowań)) > 0.001; ileLosowań++) {
+			// 3)
+			// powtarzamy losowanie tak długo aż osiągniemy przybliżony wynik
+			for (; Math.Abs (oczekiwanyWynik - (zdarzeniaSprzyjające / (double)ileLosowań)) > 0.001; ileLosowań++) {
 				
 				zestawKart.Losuj();
 				if (!zestawKart.CzyZawieraTrefl()) {
@@ -70,9 +91,9 @@ namespace Zadanie_2_7 {
 			
 			for (int i = 0; i < 3;) {
 				
-				int losowa = random.Next(0,talia.Count);
+				int losowa = random.Next(1, talia.Count + 1);
 				if (losowa != wylosowaneLiczby[0] || losowa != wylosowaneLiczby[1]) {
-					wylosowaneLiczby[i] = losowa;
+					wylosowaneLiczby[i] = losowa - 1;
 					i++;
 				}
 				
