@@ -22,4 +22,5 @@ czy wśród wylosowanych kart jest trefl.
 3. Powtórzyć losowanie z punktu 2 wielokrotnie, i zbadać ile powtórzeń losowania
 należy wykonać aby osiągnąć granicę (z dokładnością 0.1%) częstotliwości odpowiadającą prawdopodobieństwu wyznaczonemu w zadaniu 7 z zestawu 1.
 
-> Wynik wyznaczony w zadaniu 7 zestaw 1:
+> Wynik wyznaczony w zadaniu 7 zestaw 1:  
+> 9139/22100 w przybliżeniu 41,35%
